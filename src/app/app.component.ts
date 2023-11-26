@@ -7,13 +7,16 @@ import Character from './models/character';
 
 import { SwapiService } from './services/swapi.service';
 
+import { CharacterDisplayComponent } from './modules/character-display/character-display.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     CommonModule,
     RouterOutlet,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CharacterDisplayComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'

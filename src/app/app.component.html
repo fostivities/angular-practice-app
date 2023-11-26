@@ -16,6 +16,8 @@
       </button>
     </form>
 
+    
+
     @if (isLoading) {
       <p>Loading...</p>
     }
@@ -24,15 +26,7 @@
       <div>
 
         @if (character) {
-          <p>Name: {{ character.name }}</p>
-          <p>Height: {{ character.height }}</p>
-          <p>Mass: {{ character.mass }}</p>
-          <p>Films: </p>
-          <ul>
-            @for (film of character.films; track film) {
-              <li>{{ film }}</li>
-            }
-          </ul>
+          <app-character-display [character]="character" />
         }
 
         @if (isError) {

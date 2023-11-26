@@ -1,0 +1,11 @@
+<div>
+    <p>Name: {{ character.name }}</p>
+    <p>Height: {{ character.height }}</p>
+    <p>Mass: {{ character.mass }}</p>
+    <p>Films: </p>
+    <ul>
+        @for (film of character.films; track film) {
+        <li>{{ film }}</li>
+        }
+    </ul>
+</div>
