@@ -1,0 +1,53 @@
+
+<main class="main">
+  <div class="content">
+    <form (ngSubmit)="getCharacterById()" style="display: flex; flex-direction: column;">
+      <div>
+        <label for="characterId">Character Id: </label>
+        <input type="number" id="characterId" name="Enter a character id" [formControl]="characterId" />
+      </div>
+      <button 
+        type="button"
+        name="Get character by Id"
+        (click)="getCharacterById()"
+        [value]="characterId"
+        style="margin-top: 16px; width: 200px">
+          Get character
+      </button>
+    </form>
+
+    @if (isLoading) {
+      <p>Loading...</p>
+    }
+    
+    @if (!isLoading && character) {
+      <div>
+        
+      </div>
+    }
+
+    @if (!isLoading) {
+      <div>
+
+        @if (character) {
+          <p>Name: {{ character.name }}</p>
+          <p>Height: {{ character.height }}</p>
+          <p>Mass: {{ character.mass }}</p>
+          <p>Films: </p>
+          <ul>
+            @for (film of character.films; track film) {
+              <li>{{ film }}</li>
+            }
+          </ul>
+        }
+
+        @if (isError) {
+          <p>Error retrieving character id</p>
+        }
+      </div>
+    }
+  </div>
+</main>
+
+
+<router-outlet></router-outlet>
