@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import Character from './models/character';
 
@@ -22,8 +22,10 @@ import { CharacterDisplayComponent } from './modules/character-display/character
   styleUrl: './app.component.sass'
 })
 export class AppComponent {
-  characterId: FormControl<number> = new FormControl(1);
-  character: Character = null;
+  characterForm: FormGroup<{ characterId: FormControl<number> }> = new FormGroup({
+     characterId: new FormControl(1)
+  });
+  character: Character;
   isError: boolean = false;
   isLoading: boolean = false;
 
@@ -31,10 +33,17 @@ export class AppComponent {
     private swapiService: SwapiService
   ) {}
 
+  preventDefault(e: any): void {
+    e.preventDefault();
+  }
+
   async getCharacterById(): Promise<void> {
+    this.isLoading = true;
+
     try {
-      this.isLoading = true;
-      this.character = await this.swapiService.getCharacter(this.characterId.value);
+      const characterId: number = this.characterForm.get('characterId').value;
+
+      this.character = await this.swapiService.getCharacter(characterId);
     } catch (err) {
       this.character = null;
       this.isError = true;

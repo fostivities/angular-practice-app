@@ -1,16 +1,15 @@
 
 <main class="main">
   <div class="content">
-    <form (ngSubmit)="getCharacterById()" style="display: flex; flex-direction: column;">
+    <form (ngSubmit)="getCharacterById()" [formGroup]="characterForm" style="display: flex; flex-direction: column;">
       <div>
         <label for="characterId">Character Id: </label>
-        <input type="number" id="characterId" name="Enter a character id" [formControl]="characterId" />
+        <input type="number" id="characterId" name="Enter a character id" formControlName="characterId" />
       </div>
       <button 
         type="button"
         name="Get character by Id"
         (click)="getCharacterById()"
-        [value]="characterId"
         style="margin-top: 16px; width: 200px">
           Get character
       </button>
